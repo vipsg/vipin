@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vipin Gupta — Senior Data & AI Transformation Leader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --surface: #0d1320;
+      --surface2: #111827;
+      --border: rgba(255,255,255,0.07);
+      --accent: #00d4ff;
+      --accent2: #7b5cf6;
+      --accent3: #00ffc2;
+      --text: #e8edf5;
+      --muted: #7a8499;
+      --card-bg: rgba(255,255,255,0.035);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 6vw;
+      background: rgba(8,12,20,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); font-size: 0.85rem; text-decoration: none;
+      letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 6vw 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated grid background */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridDrift 20s linear infinite;
+    }
+    @keyframes gridDrift {
+      from { transform: translateY(0); }
+      to { transform: translateY(60px); }
+    }
+
+    /* Glow blobs */
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); pointer-events: none; opacity: 0.18;
+    }
+    .blob-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--accent), transparent 70%);
+      top: -200px; right: -100px;
+      animation: float1 8s ease-in-out infinite;
+    }
+    .blob-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--accent2), transparent 70%);
+      bottom: -100px; left: -150px;
+      animation: float2 10s ease-in-out infinite;
+    }
+    @keyframes float1 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(-30px,40px) scale(1.05); }
+    }
+    @keyframes float2 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(40px,-30px) scale(1.08); }
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeSlideUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.5); }
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      animation: fadeSlideUp 0.6s 0.1s ease both;
+    }
+    h1 .line2 { color: var(--accent); display: block; }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: var(--muted);
+      max-width: 580px;
+      margin: 1.5rem 0 2.5rem;
+      font-weight: 300;
+      line-height: 1.75;
+      animation: fadeSlideUp 0.6s 0.2s ease both;
+    }
+
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      animation: fadeSlideUp 0.6s 0.3s ease both;
+    }
+    .meta-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.88rem; color: var(--muted);
+    }
+    .meta-item svg { color: var(--accent); flex-shrink: 0; }
+
+    .hero-ctas {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeSlideUp 0.6s 0.4s ease both;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      transition: all 0.2s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: #33ddff; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,255,0.3); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-stats {
+      position: absolute; bottom: 60px; right: 6vw;
+      display: flex; gap: 3rem; z-index: 1;
+      animation: fadeSlideUp 0.6s 0.5s ease both;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem; font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 100px 6vw;
+      position: relative; z-index: 1;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+    h2 em { font-style: normal; color: var(--accent); }
+
+    /* ── EXPERTISE ── */
+    #expertise { background: var(--surface); }
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .expertise-item {
+      background: var(--surface);
+      padding: 2rem;
+      transition: background 0.2s;
+      position: relative;
+    }
+    .expertise-item:hover { background: rgba(0,212,255,0.04); }
+    .expertise-item::before {
+      content: '';
+      position: absolute;
+      top: 2rem; left: 2rem;
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .expertise-item h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--text);
+      padding-left: 1rem;
+      line-height: 1.4;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+    .exp-timeline { position: relative; padding-left: 2rem; }
+    .exp-timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 10px; bottom: 10px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+    .exp-item {
+      position: relative;
+      margin-bottom: 3.5rem;
+      padding-left: 2.5rem;
+    }
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem;
+      top: 8px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 20px rgba(0,212,255,0.5);
+      border: 2px solid var(--bg);
+    }
+    .exp-header {
+      display: flex; flex-wrap: wrap; align-items: flex-start;
+      justify-content: space-between; gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--text);
+    }
+    .exp-company { font-size: 0.9rem; color: var(--accent); font-weight: 500; margin-top: 2px; }
+    .exp-period {
+      font-size: 0.78rem; color: var(--muted);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 4px 12px; border-radius: 100px;
+      white-space: nowrap;
+    }
+    .exp-points { list-style: none; padding: 0; margin-top: 1rem; }
+    .exp-points li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.6rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+    .exp-points li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--accent3);
+    }
+    .exp-achievements {
+      margin-top: 1.5rem;
+      background: rgba(0,255,194,0.04);
+      border: 1px solid rgba(0,255,194,0.12);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+    .exp-achievements h4 {
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent3); margin-bottom: 0.75rem; font-weight: 600;
+    }
+    .exp-achievements li {
+      font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem;
+      padding-left: 1.25rem; position: relative;
+    }
+    .exp-achievements li::before { content: '✦'; position: absolute; left: 0; font-size: 0.65rem; color: var(--accent3); top: 3px; }
+
+    /* ── TECH STACK ── */
+    #techstack { background: var(--surface); }
+    .stack-category { margin-bottom: 2.5rem; }
+    .stack-cat-label {
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1rem; display: block;
+    }
+    .tags {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+    }
+    .tag {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,212,255,0.06);
+    }
+
+    /* ── INDUSTRIES ── */
+    #industries { background: var(--bg); }
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .industry-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .industry-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .industry-card:hover::after { transform: scaleX(1); }
+    .industry-card:hover { border-color: rgba(0,212,255,0.2); transform: translateY(-4px); }
+    .ind-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .ind-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .ind-list { list-style: none; }
+    .ind-list li {
+      font-size: 0.85rem; color: var(--muted);
+      margin-bottom: 0.4rem; padding-left: 1rem; position: relative;
+    }
+    .ind-list li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-size: 1.2em; line-height: 1; }
+
+    /* ── GENAI ── */
+    #genai { background: var(--surface); }
+    .genai-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .genai-card {
+      background: linear-gradient(135deg, rgba(123,92,246,0.08) 0%, rgba(0,212,255,0.05) 100%);
+      border: 1px solid rgba(123,92,246,0.2);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: all 0.3s;
+    }
+    .genai-card:hover {
+      border-color: var(--accent2);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(123,92,246,0.15);
+    }
+    .genai-card p {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.7;
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--bg); }
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .edu-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      display: flex; gap: 1.25rem; align-items: flex-start;
+    }
+    .edu-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;
+    }
+    .edu-inst { font-size: 0.82rem; color: var(--accent); margin-bottom: 4px; }
+    .edu-loc { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--surface);
+      text-align: center;
+    }
+    .contact-card {
+      max-width: 700px; margin: 0 auto;
+      background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(123,92,246,0.06));
+      border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 24px;
+      padding: 4rem;
+    }
+    .contact-card h2 { margin-bottom: 1rem; }
+    .contact-card p { color: var(--muted); margin-bottom: 2.5rem; }
+    .contact-links {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .contact-link {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 20px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,212,255,0.06);
+      transform: translateY(-2px);
+    }
+    .contact-link svg { flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 6vw;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      position: relative; z-index: 1;
+    }
+    footer p { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 5vw; }
+      .nav-links { display: none; }
+      .hero-stats { display: none; }
+      section { padding: 70px 5vw; }
+      .contact-card { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">VG<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#techstack">Tech Stack</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#genai">GenAI</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Available for Advisory & CxO Consulting</div>
+    <h1>
+      Vipin Gupta
+      <span class="line2">Data & AI Leader.</span>
+    </h1>
+    <p class="hero-sub">
+      Senior Data & AI Transformation Leader with 24+ years delivering cloud-native data platforms, GenAI solutions, and ML-driven decision systems for Fortune 500 enterprises across North America, Europe, and APAC.
+    </p>
+
+    <div class="hero-meta">
+      <div class="meta-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Bengaluru, India
+      </div>
+      <div class="meta-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L2 7h20l-6-4z"/></svg>
+        Publicis Sapient — Sr. Engineering Manager
+      </div>
+      <div class="meta-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Amazon · UnitedHealth · HSBC · HP Enterprise
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="https://www.linkedin.com/in/vipingupta2001/" target="_blank" class="btn-outline">LinkedIn Profile →</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">24<span>+</span></div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">500<span>+</span></div>
+      <div class="stat-label">Fortune Clients</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">60<span>%</span></div>
+      <div class="stat-label">Insight Turnaround ↑</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="reveal">
+    <div class="section-label">Core Expertise</div>
+    <h2>What I <em>Do</em></h2>
+  </div>
+  <div class="expertise-grid reveal">
+    <div class="expertise-item"><h3>Data & Analytics Strategy</h3></div>
+    <div class="expertise-item"><h3>Modern Data Platforms — Databricks, Snowflake</h3></div>
+    <div class="expertise-item"><h3>Data Modelling & Optimization</h3></div>
+    <div class="expertise-item"><h3>Advanced Analytics & Machine Learning</h3></div>
+    <div class="expertise-item"><h3>Generative AI Enablement</h3></div>
+    <div class="expertise-item"><h3>Cloud Data Engineering — AWS, GCP, Azure</h3></div>
+    <div class="expertise-item"><h3>Enterprise Data Architecture — Lakehouse, Data Fabric & Mesh</h3></div>
+    <div class="expertise-item"><h3>Data Governance, Security & Compliance</h3></div>
+    <div class="expertise-item"><h3>Consulting & Stakeholder Management</h3></div>
+    <div class="expertise-item"><h3>Global Delivery & Client Leadership</h3></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">Career</div>
+    <h2>Work <em>Experience</em></h2>
+  </div>
+
+  <div class="exp-timeline">
+
+    <!-- Current Role -->
+    <div class="exp-item reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Sr. Engineering Manager — Data & AI Transformation</div>
+          <div class="exp-company">Publicis Sapient</div>
+        </div>
+        <span class="exp-period">Nov 2020 – Present</span>
+      </div>
+      <ul class="exp-points">
+        <li>Lead global data modernization programs for Fortune 500 and GCC clients across North America, Europe, and APAC.</li>
+        <li>Design and deliver cloud-native analytics platforms enabling advanced analytics, AI/ML, and real-time insights.</li>
+        <li>Advise CXOs and data leaders on GenAI adoption, use-case prioritization, and responsible AI frameworks.</li>
+        <li>Drive end-to-end delivery spanning strategy, architecture, engineering, governance, and operating model design.</li>
+        <li>Partner with Databricks and Snowflake to bring best-in-class capabilities for client needs.</li>
+        <li>Build and mentor high-performing data engineering, analytics, and ML teams across geographies.</li>
+      </ul>
+      <div class="exp-achievements">
+        <h4>Key Achievements</h4>
+        <ul>
+          <li>Enabled enterprise-wide AI/ML adoption by modernizing legacy data warehouses into scalable lakehouse architectures.</li>
+          <li>Delivered GenAI-powered analytics accelerators improving insight turnaround time by 40–60%.</li>
+          <li>Established data governance and observability frameworks compliant with industry regulations.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Previous -->
+    <div class="exp-item reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Senior Data & AI Engineering Manager / Architect</div>
+          <div class="exp-company">Global Enterprises & GCCs — Amazon · UnitedHealth · HSBC · HP Enterprise</div>
+        </div>
+        <span class="exp-period">2001 – 2020</span>
+      </div>
+      <ul class="exp-points">
+        <li>Delivered large-scale consulting and engineering data programs across finance, retail, and healthcare.</li>
+        <li>Architected enterprise data platforms supporting BI, advanced analytics, and ML workloads with cloud-native and open-source technologies.</li>
+        <li>Led modernization from on-prem systems to cloud-based data ecosystems.</li>
+        <li>Partnered with business and technology leaders to translate business strategy into scalable data solutions.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="techstack">
+  <div class="reveal">
+    <div class="section-label">Technology</div>
+    <h2>Tech <em>Stack</em></h2>
+  </div>
+
+  <div class="reveal">
+    <div class="stack-category">
+      <span class="stack-cat-label">Data Platforms</span>
+      <div class="tags">
+        <span class="tag">Snowflake</span>
+        <span class="tag">BigQuery</span>
+        <span class="tag">Redshift</span>
+        <span class="tag">Databricks</span>
+      </div>
+    </div>
+
+    <div class="stack-category">
+      <span class="stack-cat-label">Programming</span>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Scala</span>
+        <span class="tag">Java</span>
+        <span class="tag">SQL</span>
+        <span class="tag">APIs</span>
+      </div>
+    </div>
+
+    <div class="stack-category">
+      <span class="stack-cat-label">Cloud</span>
+      <div class="tags">
+        <span class="tag">AWS</span>
+        <span class="tag">Google Cloud Platform</span>
+        <span class="tag">Microsoft Azure</span>
+      </div>
+    </div>
+
+    <div class="stack-category">
+      <span class="stack-cat-label">Data Engineering</span>
+      <div class="tags">
+        <span class="tag">Apache Spark</span>
+        <span class="tag">Airflow</span>
+        <span class="tag">dbt</span>
+        <span class="tag">ELT / CDC</span>
+        <span class="tag">Streaming</span>
+        <span class="tag">Event-driven ETL</span>
+      </div>
+    </div>
+
+    <div class="stack-category">
+      <span class="stack-cat-label">AI / ML</span>
+      <div class="tags">
+        <span class="tag">TensorFlow</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Vertex AI</span>
+        <span class="tag">SageMaker</span>
+      </div>
+    </div>
+
+    <div class="stack-category">
+      <span class="stack-cat-label">Generative AI</span>
+      <div class="tags">
+        <span class="tag">LLM-based Analytics</span>
+        <span class="tag">Prompt Engineering</span>
+        <span class="tag">AI Agents</span>
+        <span class="tag">Platform Accelerators</span>
+      </div>
+    </div>
+
+    <div class="stack-category">
+      <span class="stack-cat-label">Governance & Observability</span>
+      <div class="tags">
+        <span class="tag">Data Quality Frameworks</span>
+        <span class="tag">Lineage</span>
+        <span class="tag">Security & Privacy Controls</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div class="reveal">
+    <div class="section-label">Domain Experience</div>
+    <h2>Industry <em>Highlights</em></h2>
+  </div>
+  <div class="industry-grid">
+    <div class="industry-card reveal">
+      <div class="ind-icon">🏦</div>
+      <div class="ind-title">Finance</div>
+      <ul class="ind-list">
+        <li>Risk analytics & regulatory reporting</li>
+        <li>Fraud detection systems</li>
+        <li>Portfolio management platforms</li>
+        <li>Customer 360 platforms</li>
+      </ul>
+    </div>
+    <div class="industry-card reveal">
+      <div class="ind-icon">🛍️</div>
+      <div class="ind-title">Retail</div>
+      <ul class="ind-list">
+        <li>Inventory & demand forecasting</li>
+        <li>Personalisation at scale</li>
+        <li>Supply-chain analytics</li>
+      </ul>
+    </div>
+    <div class="industry-card reveal">
+      <div class="ind-icon">🏥</div>
+      <div class="ind-title">Healthcare</div>
+      <ul class="ind-list">
+        <li>Data integration & analytics</li>
+        <li>Patient insights & operational analytics</li>
+        <li>Compliance-driven platforms</li>
+        <li>Insurance fraud analytics</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GENAI -->
+<section id="genai">
+  <div class="reveal">
+    <div class="section-label">Thought Leadership</div>
+    <h2>GenAI & <em>AI Agent</em> Expertise</h2>
+  </div>
+  <div class="genai-grid">
+    <div class="genai-card reveal">
+      <p>Lead advisor on <strong>enterprise adoption of Generative AI</strong>, enabling advanced analytics, conversational BI, and intelligent automation.</p>
+    </div>
+    <div class="genai-card reveal">
+      <p>Designed <strong>AI Agent–driven data platforms</strong> where agents orchestrate ingestion, quality checks, transformation, governance, and consumption.</p>
+    </div>
+    <div class="genai-card reveal">
+      <p>Applied <strong>LLMs for schema inference</strong>, metadata enrichment, data quality rule generation, and semantic layers.</p>
+    </div>
+    <div class="genai-card reveal">
+      <p>Enabled <strong>human-in-the-loop AI operating models</strong> ensuring trust, explainability, and regulatory compliance.</p>
+    </div>
+    <div class="genai-card reveal">
+      <p>Defined <strong>Responsible AI and GenAI governance frameworks</strong> covering security, privacy, bias, and observability.</p>
+    </div>
+    <div class="genai-card reveal">
+      <p>Speaker and internal evangelist on <strong>GenAI for Analytics</strong>, ML Ops modernization, and decision intelligence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <div class="section-label">Academic Background</div>
+    <h2>Education</h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Masters in Computer Application</div>
+        <div class="edu-inst">VBS Purvanchal University</div>
+        <div class="edu-loc">Jaunpur</div>
+      </div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-icon">📐</div>
+      <div>
+        <div class="edu-degree">Bachelor in Science — Mathematics</div>
+        <div class="edu-inst">Kanpur University</div>
+        <div class="edu-loc">Kanpur</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-card reveal">
+    <div class="section-label" style="justify-content:center;display:flex">Let's Connect</div>
+    <h2>Ready to <em>Transform</em><br>Your Data Strategy?</h2>
+    <p>Whether you're looking to modernise your data platform, adopt GenAI at scale, or build a data-driven culture — let's talk.</p>
+    <a href="mailto:vips.g@hotmail.com" class="btn-primary">Send an Email</a>
+    <div class="contact-links">
+      <a href="mailto:vips.g@hotmail.com" class="contact-link">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        vips.g@hotmail.com
+      </a>
+      <a href="tel:+919611620943" class="contact-link">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.05 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+        +91 96116 20943
+      </a>
+      <a href="https://www.linkedin.com/in/vipingupta2001/" target="_blank" class="contact-link">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/vipingupta2001
+      </a>
+      <a href="#" class="contact-link">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Bengaluru, India
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Vipin Gupta. Senior Data & AI Transformation Leader.</p>
+  <p style="color: var(--muted); font-size: 0.78rem;">Bengaluru, India · 24+ Years of Impact</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
